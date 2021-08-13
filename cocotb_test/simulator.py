@@ -65,7 +65,7 @@ class Simulator(object):
         os.makedirs(self.sim_dir, exist_ok=True)
 
         self.logger = logging.getLogger("cocotb")
-        self.logger.setLevel(logging.INFO)
+#        self.logger.setLevel(logging.INFO)
         logging.basicConfig(format="%(levelname)s %(name)s: %(message)s")
 
         warnings.simplefilter('always', DeprecationWarning)
