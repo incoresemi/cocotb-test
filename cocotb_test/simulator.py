@@ -180,7 +180,7 @@ class Simulator(object):
         for e in os.environ:
             self.env[e] = os.environ[e]
 
-        if self.env['LIBPYTHON_LOC'] is None:
+        if 'LIBPYTHON_LOC' not in self.env or self.env['LIBPYTHON_LOC'] is None:
             self.env["LIBPYTHON_LOC"] = find_libpython.find_libpython()
 
         self.env["PATH"] += os.pathsep + self.lib_dir
