@@ -265,7 +265,7 @@ class Simulator(object):
             ) as p:
                 self.process = p
                 for line in p.stdout:
-                    self.logger.info(line.decode("utf-8").rstrip())
+                    self.logger.debug(line.decode("utf-8").rstrip())
 
             self.process = None
             if p.returncode:
