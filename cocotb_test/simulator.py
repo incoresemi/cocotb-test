@@ -12,6 +12,7 @@ import signal
 import warnings
 import cocotb._vendor.find_libpython as find_libpython
 import cocotb.config
+import shlex
 
 from distutils.spawn import find_executable
 from distutils.sysconfig import get_config_var
@@ -206,7 +207,7 @@ class Simulator(object):
 
         # use temporary results file
         if not os.getenv("COCOTB_RESULTS_FILE"):
-            tmp_results_file = tempfile.NamedTemporaryFile(prefix=self.sim_dir + os.path.sep, suffix="_results.xml")
+            tmp_results_file = tempfile.NamedTemporaryFile(prefix=self.work_dir+ os.path.sep, suffix="_results.xml")
             results_xml_file = tmp_results_file.name
             tmp_results_file.close()
             self.env["COCOTB_RESULTS_FILE"] = results_xml_file
@@ -906,7 +907,7 @@ class Verilator(Simulator):
             + self.verilog_sources
         )
 
-        cmd.append(["make", "-C", self.sim_dir, "-f", "Vtop.mk"])
+        cmd.append(["make", "OPT_SLOW='-O3'", "OPT_FAST='-O3'", "-C", self.sim_dir, "-f", "Vtop.mk"])
 
         if not self.compile_only:
             cmd.append([out_file] + self.plus_args)
