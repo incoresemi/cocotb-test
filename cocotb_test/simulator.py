@@ -907,7 +907,7 @@ class Verilator(Simulator):
             + self.verilog_sources
         )
 
-        cmd.append(["make", "OPT_SLOW='-O3'", "OPT_FAST='-O3'", "-C", self.sim_dir, "-f", "Vtop.mk"])
+        cmd.append(["make", "OPT_SLOW=-O3 -std=c++17", "OPT_FAST=-O3 -std=c++17", "-C", self.sim_dir, "-f", "Vtop.mk"])
 
         if not self.compile_only:
             cmd.append([out_file] + self.plus_args)
